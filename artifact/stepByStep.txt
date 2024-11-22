@@ -1,0 +1,8 @@
+Быстрый тест:
+1. Настроить pgCompare.properties (прописать пути до БД и user\pass с правом создания схем и таблиц)
+2. Выполнить скрипт по наполнения БД тестовыми данными - one_pg_sample.sql
+3. java -jar pgcompare.jar --init (должна создастся собственная БД)
+4. java -jar pgcompare.jar --discover (должны автоматически заполниться сравниваемые таблицы)
+5. java -jar pgcompare.jar --batch 0 (само сравнение)
+6. java -jar pgcompare.jar --batch 0 --check (просмотр результатов). Если все ок, то в выводе консоли будет строка:
+    `[WARNING] [ReconcileCheck          ] Out-of-Sync:  PK = {"lid": 9}; Differences = [{"city":{"source":"Miami","target":"!!!!BAD!!!!"}}]`

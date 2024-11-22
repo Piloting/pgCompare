@@ -338,8 +338,18 @@ public class pgCompare {
         }
 
         String msgFormat = "Run Summary:  Elapsed Time (seconds) = %s; Total Rows Processed = %s; Total Out-of-Sync = %s; Through-put (rows/per second) = %s";
-        Logging.write("info", "main", String.format(msgFormat, df.format((endStopWatch - startStopWatch) / 1000),
-                df.format(totalRows), df.format(outOfSyncRows), df.format(totalRows / ((endStopWatch - startStopWatch) / 1000))));
+        long d = (endStopWatch - startStopWatch) / 1000;
+        d = d == 0 ? 1 : d;
+
+        Logging.write(
+                "info",
+                "main",
+                String.format(
+                        msgFormat,
+                        df.format((endStopWatch - startStopWatch) / 1000),
+                        df.format(totalRows),
+                        df.format(outOfSyncRows),
+                        df.format(totalRows / d)));
     }
 
 
