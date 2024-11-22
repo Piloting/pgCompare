@@ -126,18 +126,12 @@ public class ReconcileController {
             dctmSource.setCompareSQL(switch (Props.getProperty("source-type")) {
                 case "postgres" -> dbPostgres.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("source-database-hash")), dctmSource, ciSource);
                 case "oracle" -> dbOracle.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("source-database-hash")), dctmSource, ciSource);
-                case "mysql" -> dbMySQL.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("source-database-hash")), dctmSource, ciSource);
-                case "mssql" -> dbMSSQL.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("source-database-hash")), dctmSource, ciSource);
-                case "db2" -> dbDB2.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("source-database-hash")), dctmSource, ciSource);
                 default -> "";
             });
 
             dctmTarget.setCompareSQL(switch (Props.getProperty("target-type")) {
                 case "postgres" -> dbPostgres.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("target-database-hash")), dctmTarget, ciTarget);
                 case "oracle" -> dbOracle.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("target-database-hash")), dctmTarget, ciTarget);
-                case "mysql" -> dbMySQL.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("target-database-hash")), dctmTarget, ciTarget);
-                case "mssql" -> dbMSSQL.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("target-database-hash")), dctmTarget, ciTarget);
-                case "db2" -> dbDB2.buildLoadSQL(!check && Boolean.parseBoolean(Props.getProperty("target-database-hash")), dctmTarget, ciTarget);
                 default -> "";
             });
 

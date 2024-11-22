@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 import static com.crunchydata.util.DataUtility.getNativeCase;
 import static com.crunchydata.util.DataUtility.preserveCase;
-import static com.crunchydata.util.SQLConstantsDB2.SQL_DB2_SELECT_TABLES;
-import static com.crunchydata.util.SQLConstantsMSSQL.SQL_MSSQL_SELECT_TABLES;
-import static com.crunchydata.util.SQLConstantsMYSQL.SQL_MYSQL_SELECT_TABLES;
 import static com.crunchydata.util.SQLConstantsOracle.SQL_ORACLE_SELECT_TABLES;
 import static com.crunchydata.util.SQLConstantsPostgres.SQL_POSTGRES_SELECT_TABLES;
 import static com.crunchydata.util.SQLConstantsRepo.*;
@@ -98,9 +95,6 @@ public class TableController {
     public static JSONArray getDatabaseTables (String databasePlatform, Connection conn, String schema) {
         return switch (databasePlatform) {
             case "oracle" -> dbCommon.getTables(conn, schema, SQL_ORACLE_SELECT_TABLES);
-            case "mysql" -> dbCommon.getTables(conn, schema, SQL_MYSQL_SELECT_TABLES);
-            case "mssql" -> dbCommon.getTables(conn, schema, SQL_MSSQL_SELECT_TABLES);
-            case "db2" -> dbCommon.getTables(conn, schema, SQL_DB2_SELECT_TABLES);
             default -> dbCommon.getTables(conn, schema, SQL_POSTGRES_SELECT_TABLES);
         };
     }

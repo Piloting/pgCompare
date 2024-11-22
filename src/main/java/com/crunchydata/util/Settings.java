@@ -168,8 +168,12 @@ public class Settings {
      */
     public static Properties setProjectConfig (Connection conn, Integer pid, Properties prop) {
 
-        JSONObject projectConfig = new JSONObject(RepoController.getProjectConfig(conn, pid));
+        String dbConfig = RepoController.getProjectConfig(conn, pid);
+        if (dbConfig == null) {
+            return prop;
+        }
 
+        JSONObject projectConfig = new JSONObject(dbConfig);
 
         if (projectConfig != null) {
 

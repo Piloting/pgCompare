@@ -171,9 +171,6 @@ public class pgCompare {
     private static Connection getDatabaseConnection(String dbType, String destType) {
         return switch (dbType) {
             case "oracle" -> dbOracle.getConnection(Props, destType);
-            case "mysql" -> dbMySQL.getConnection(Props, destType);
-            case "mssql" -> dbMSSQL.getConnection(Props, destType);
-            case "db2" -> dbDB2.getConnection(Props, destType);
             default -> dbPostgres.getConnection(Props, destType, THREAD_NAME);
         };
     }

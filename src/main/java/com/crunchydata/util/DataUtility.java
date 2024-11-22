@@ -73,9 +73,6 @@ public class DataUtility {
     public static String getNativeCase(String databasePlatform) {
         return switch (databasePlatform) {
             case "oracle" -> dbOracle.nativeCase;
-            case "mysql" -> dbMySQL.nativeCase;
-            case "mssql" -> dbMSSQL.nativeCase;
-            case "db2" -> dbDB2.nativeCase;
             default -> dbPostgres.nativeCase;
         };
     }

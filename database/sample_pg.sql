@@ -16,15 +16,15 @@ CREATE TABLE pgctest.emp (eid int generated always as identity (start with 1 inc
 INSERT INTO pgctest.emp (first_name, last_name, email, hire_dt, age, zip, status, salary, last_login, bio) VALUES
 ('Mickey', 'Mouse', 'mickey.mouse@disney.com', TO_DATE('2010-05-12', 'YYYY-MM-DD'), 35, 90210, 'ACT', 60000.00, TO_TIMESTAMP('2024-06-15 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Mickey is the beloved cartoon character created by Walt Disney.'),
 ('Donald', 'Duck', 'donald.duck@disney.com', TO_DATE('2012-03-22', 'YYYY-MM-DD'), 33, 90211, 'ACT', 55000.00, TO_TIMESTAMP('2024-06-16 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Donald is a classic Disney character known for his temper and distinctive voice.'),
-('Bugs', 'Bunny', 'bugs.bunny@wb.com', TO_DATE('2011-07-19', 'YYYY-MM-DD'), 32, 90001, 'ACT', 58000.00, TO_TIMESTAMP('2024-06-17 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Bugs is the iconic character from Looney Tunes, famous for his catchphrase "What\'s up, Doc?".'),
+('Bugs', 'Bunny', 'bugs.bunny@wb.com', TO_DATE('2011-07-19', 'YYYY-MM-DD'), 32, 90001, 'ACT', 58000.00, TO_TIMESTAMP('2024-06-17 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Bugs is the iconic character from Looney Tunes, famous for his catchphrase "Whats up, Doc?".'),
 ('Scooby', 'Doo', 'scooby.doo@hanna-barbera.com', TO_DATE('2009-11-25', 'YYYY-MM-DD'), 40, 90212, 'ACT', 62000.00, TO_TIMESTAMP('2024-06-18 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Scooby-Doo is the lovable Great Dane from the Hanna-Barbera animated series.'),
 ('Fred', 'Flintstone', 'fred.flintstone@hanna-barbera.com', TO_DATE('2006-08-30', 'YYYY-MM-DD'), 50, 90214, 'ACT', 48000.00, TO_TIMESTAMP('2024-06-19 18:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Fred is the prehistoric family man from The Flintstones.'),
 ('George', 'Jetson', 'george.jetson@hanna-barbera.com', TO_DATE('2013-02-14', 'YYYY-MM-DD'), 38, 90215, 'ACT', 52000.00, TO_TIMESTAMP('2024-06-19 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'George is the father in the futuristic family from The Jetsons.'),
 ('Tom', 'Cat', 'tom.cat@mgm.com', TO_DATE('2016-12-10', 'YYYY-MM-DD'), 30, 90004, 'ACT', 54000.00, TO_TIMESTAMP('2024-06-19 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Tom is the cat always chasing Jerry in the classic MGM animated series.');
 
 CREATE TABLE pgctest.location (lid int generated always as identity (start with 1 increment by 1) primary key,
-                          longitude numeric(10,8),
-                          latitude numeric(10,8),
+                          longitude numeric(10,6),
+                          latitude numeric(10,6),
                           city varchar(100),
                           state char(2),
                           zip int,

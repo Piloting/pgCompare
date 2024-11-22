@@ -1,0 +1,83 @@
+Схема БД
+
+dc_project         - проект, для разделение запусков на разных БД или схемах
+	pid            - id проекта
+	project_name   - имя
+	project_config - тут в виде json можно добавить конфиги, вместо или дополнительно к pgCompare.properties
+
+dc_table            - описание сравниваемой таблицы
+	pid             - ссылка на dc_project
+	tid             - id таблицы
+	batch_nbr       - какой-то номер пачки. Непонятно
+	parallel_degree - степень параллельности. число потоков sql += " AND mod(" + modColumn + "," + parallelDegree +")="+threadNumber;
+	status          - какой-то статус - enabled/disabled
+	table_alias     - алиас, имя таблицы
+
+dc_table_column     - описание сравниваемой колонки
+	column_id       - id колонки
+	tid             - ссылка на таблицу
+	column_alias    - алиас, имя колонки
+	status          - какой-то статус - compare/ignore
+
+dc_table_map             - связи сравниваемых таблиц в БД source и target и их настройки
+	tid                  - ссылка на таблицу
+	dest_type            - тип source/target
+	schema_name          - имя схемы в БД
+	table_name           - имя таблицы
+	parallel_degree      - для параллельной работы. число потоков
+	mod_column           - для параллельной работы. колонка разделяющая на потоки. sql += " AND mod(" + modColumn + "," + parallelDegree +")="+threadNumber;
+	table_filter         - sql текст, добавляется в where при отборе записей. sql += " AND " + tableMap.getTableFilter();
+	schema_preserve_case - имя схемы в нужном для БД регистре
+	table_preserve_case  - имя таблицы в нужном для БД регистре
+
+dc_table_column_map     - связи сравниваемых колонок в БД source и target и их настройки
+	column_id           - id колонки
+	tid                 - ссылка на таблицу
+	column_name         - имя колонки
+	column_origin       - тип source/target
+	column_nullable     - nullable true\false
+	column_primarykey   - primarykey true\false
+	data_type           - исходный тип данных колонки в БД
+	data_class          - преобразованный тип колонки (see ColumnValidation.java)
+	data_length         - длина значения?
+	number_precision    - всего цифр
+	number_scale        - цифр после запятой
+	map_expression      - sql для приведения к строке. coalesce(case when length(first_name)=0 then ' ' else first_name::text end,' ')
+	map_type            - 'column'. Хз
+	preserve_case       - брать ли имя колонки в кавычки
+	supported           - поддерживается ли тип данных. Если не поддерживается - игнорируется. true\false
+
+dc_table_history  - какая-то таблица истории
+	tid           - ссылка на таблицу
+	start_dt      - время начала
+	end_dt        - время окончания
+	action_result - json результата {"equal": 0, "status": "success", "notEqual": 1, "tableName": "location", "compareStatus": "out-of-sync", "missingSource": 0, "missingTarget": 0}
+	batch_nbr     - номер пачки
+	action_type   - конст строка - reconcile
+	load_id       - конст строка - reconcile
+	row_count     - конст 0
+
+dc_result               - результаты сравнения
+	cid                 - Compare id
+	rid                 - Run ID
+	tid                 - ссылка на таблицу
+	table_name          - имя таблицы
+	compare_start       - время начала сравнения таблицы
+	compare_end         - время окончания сравнения таблицы
+	source_cnt          - количество строк в source таблице
+	target_cnt          - количество строк в target таблице
+	equal_cnt           - количество идентичных строк
+	not_equal_cnt       - количество отличающихся строк
+	missing_source_cnt  - количество не найденных строк в source таблице
+	missing_target_cnt  - количество не найденных строк в target таблице
+	status              - итог: нет отличий\есть отличия. in-sync\out-of-sync
+
+dc_target\dc_source - что-то связанное с результатами сравнения
+	tid            - ссылка на таблицу
+	table_name     - имя таблицы (пусто)
+	pk             - json {"lid": 9}
+	pk_hash        - видимо хэш первичного ключа
+	compare_result - какой-то результат сравнения: n = 'out-of-sync'; m = 'missing target'\'missing source' в зависимости от таблицы dc_source\dc_target; e; null
+	column_hash    - видимо хэш склеенной колонки
+	batch_nbr      - номер пачки
+	thread_nbr     - номер потока

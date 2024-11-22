@@ -128,9 +128,6 @@ public class ColumnController {
 
         JSONArray colExpression = switch (platform) {
             case "oracle" -> dbOracle.getColumns(conn, schema, table);
-            case "mysql" -> dbMySQL.getColumns(conn, schema, table);
-            case "mssql" -> dbMSSQL.getColumns(conn, schema, table);
-            case "db2" -> dbDB2.getColumns(conn, schema, table);
             default -> dbPostgres.getColumns(conn, schema, table);
         };
 
@@ -290,9 +287,6 @@ public class ColumnController {
     public static JSONArray getTableColumns (String databasePlatform, Connection conn, String schema, String tableName) {
         return switch (databasePlatform) {
             case "oracle" -> dbOracle.getColumns(conn, schema, tableName);
-            case "mysql" -> dbMySQL.getColumns(conn, schema, tableName);
-            case "mssql" -> dbMSSQL.getColumns(conn, schema, tableName);
-            case "db2" -> dbDB2.getColumns(conn, schema, tableName);
             default -> dbPostgres.getColumns(conn, schema, tableName);
         };
     }

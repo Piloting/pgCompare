@@ -108,15 +108,6 @@ public class threadReconcile extends Thread {
                 case "oracle":
                     conn = dbOracle.getConnection(Props,targetType);
                     break;
-                case "mysql":
-                    conn = dbMySQL.getConnection(Props,targetType);
-                    break;
-                case "mssql":
-                    conn = dbMSSQL.getConnection(Props,targetType);
-                    break;
-                case "db2":
-                    conn = dbDB2.getConnection(Props,targetType);
-                    break;
                 default:
                     conn = dbPostgres.getConnection(Props,targetType, "reconcile");
                     conn.setAutoCommit(false);
